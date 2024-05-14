@@ -1,0 +1,19 @@
+name: Deploy PBIX to Power BI Workspace
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  deploy:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Power BI PowerShell module
+        run: |
+          Install-Module -Name MicrosoftPowerBIMgmt -Force -AllowClobber -Scope CurrentUser
+          Import-Module MicrosoftPowerBIMgmt
